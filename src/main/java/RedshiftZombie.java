@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class RedshiftZombie {
 
     private static final Integer NUM_THREADS = 6;
-    private static final int QUERY_TIMEOUT = 10;
     private static final List<String> QUERY_RUNNING_TIMES =
             Arrays.asList("10.0", "20.0", "30.0", "40.0", "50.0", "60.0");
 
@@ -103,10 +102,8 @@ public class RedshiftZombie {
     private static void executeSleep(DataSource ds, String s) throws SQLException {
         try (Connection conn = ds.getConnection();
              Statement stmt = conn.createStatement()) {
-
             String query = "SELECT act_like_a_zombie(" + s + ")";
             print(Thread.currentThread().getName() + " is going to execute : " + query);
-            stmt.execute("set lock_timeout "+QUERY_TIMEOUT);
             stmt.execute(query);
         }
     }
