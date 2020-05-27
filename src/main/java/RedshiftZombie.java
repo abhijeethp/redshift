@@ -56,6 +56,7 @@ public class RedshiftZombie {
 
                             String threadName = Thread.currentThread().getName();
 
+                            // one of the threads crashes, which should ideally interrupt the other threads
                             if (threadName.endsWith("thread-2"))
                                 throw new RuntimeException(
                                         "This query exploded the DB! boom \uD83D\uDCA5 \uD83D\uDCA3!!");
